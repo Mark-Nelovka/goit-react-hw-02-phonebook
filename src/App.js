@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
 import s from "./App.module.css";
-import Form from "./Components/Form";
-import ContactList from "./Components/ContactList";
-import Filter from "./Components/Filtet";
-// import WindowModal from "./Components/Modal";
+import Form from "./Components/Form/Form";
+import ContactList from "./Components/Contacts/ContactList";
+import Filter from "./Components/Filter/Filtet";
+import WindowModal from "./Components/Modal/Modal";
 
 class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
+      { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
+      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
+      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
+    ],
     filter: "",
+    isOpen: false,
+    deleteName: "",
   };
 
   dataSubmit = (data) => {
@@ -28,7 +35,26 @@ class App extends Component {
         contacts: [contact, ...prevState.contacts],
       }));
     }
-    // console.log(this.state.contacts)
+  };
+
+  onDelete = (contactDeleteDId) => {
+    this.setState((prevState) => {
+      return {
+        contacts: prevState.contacts.filter(
+          ({ id }) => id !== contactDeleteDId
+        ),
+        isOpen: false,
+      };
+    });
+  };
+
+  dontDelete = () => {
+    this.setState((prevState) => {
+      return {
+        isOpen: !prevState.isOpen,
+        deleteName: "",
+      };
+    });
   };
 
   filterValue = (e) => {
@@ -39,13 +65,14 @@ class App extends Component {
   removeContact = (contactId) => {
     this.setState((prevState) => {
       return {
-        contacts: prevState.contacts.filter(({ id }) => id !== contactId.id),
+        deleteName: contactId,
+        isOpen: !prevState.isOpen,
       };
     });
   };
 
   render() {
-    const { contacts, filter } = this.state;
+    const { contacts, filter, isOpen, deleteName } = this.state;
     const filterName = contacts.filter((contact) =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
@@ -61,7 +88,15 @@ class App extends Component {
           contacts={filterName}
           onRemoveContact={this.removeContact}
         />
-        {/* <WindowModal modalRemove={this.removeContact} /> */}
+        {isOpen ? (
+          <WindowModal
+            modalRemove={deleteName}
+            dontDelete={this.dontDelete}
+            onDelete={this.onDelete}
+          />
+        ) : (
+          ""
+        )}
       </section>
     );
   }

@@ -9,7 +9,6 @@ export default class Form extends Component {
 
   handleInputCgange = (e) => {
     const { name, value } = e.currentTarget;
-    // console.log(this.state)
     this.setState({ [name]: value });
   };
 

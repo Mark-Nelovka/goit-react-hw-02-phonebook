@@ -2,7 +2,6 @@ import React from "react";
 import s from "./ContList.module.css";
 
 export default function ContactList({ contacts, onRemoveContact }) {
-  // console.log(contacts);
   return (
     <ol className={s.ul}>
       {contacts.map(({ id, name, number }) => {
