@@ -1,0 +1,17 @@
+.ul {
+  text-decoration: none;
+}
+
+.li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.btn {
+  margin-left: 15px;
+  width: 70px;
+  font-size: 13px;
+}
+
+.btn:hover {
+  background-color: rgb(228, 43, 43);
+}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { nanoid } from 'nanoid';
+import s from "./Form.module.css";
 
 export default class Form extends Component {
   state = {
@@ -25,10 +25,11 @@ export default class Form extends Component {
   };
   render() {
     return (
-      <form onSubmit={this.btnFormSubmit}>
+      <form className={s.form} onSubmit={this.btnFormSubmit}>
         <label>
           Name
           <input
+            className={s.input}
             type="text"
             name="name"
             value={this.state.name}
@@ -37,7 +38,11 @@ export default class Form extends Component {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
+        </label>
+        <label>
+          Number
           <input
+            className={s.input}
             type="tel"
             name="number"
             onChange={this.handleInputCgange}
@@ -48,7 +53,9 @@ export default class Form extends Component {
           />
         </label>
 
-        <button type="submit">Добавить контакт</button>
+        <button className={s.btn} type="submit">
+          Добавить контакт
+        </button>
       </form>
     );
   }
