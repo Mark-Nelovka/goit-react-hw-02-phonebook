@@ -1,4 +1,5 @@
 import s from "./Modal.module.css";
+import PropTypes from "prop-types";
 export default function WindowModal({ modalRemove, onDelete, dontDelete }) {
   return (
     <div className={s.backdrop}>
@@ -18,3 +19,9 @@ export default function WindowModal({ modalRemove, onDelete, dontDelete }) {
     </div>
   );
 }
+
+WindowModal.propTypes = {
+  modalRemove: PropTypes.object,
+  onDelete: PropTypes.func,
+  dontDelete: PropTypes.func,
+};

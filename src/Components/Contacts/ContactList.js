@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import s from "./ContList.module.css";
 
 export default function ContactList({ contacts, onRemoveContact }) {
@@ -22,3 +23,10 @@ export default function ContactList({ contacts, onRemoveContact }) {
     </ol>
   );
 }
+
+ContactList.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
+  number: PropTypes.number,
+  onRemoveContact: PropTypes.func,
+};
